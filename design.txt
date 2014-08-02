@@ -1,0 +1,42 @@
+Intro
+	The waiting game is a fast paced, 2d action full table service simulator.
+	
+Actors
+	Player
+		-Move x,y continuously according to gravity
+		-Interact with tables, service stations
+		-Hold out Item
+		-Cycle through held items
+		-Upgradeable attributes(inv, speed, etc)
+		
+	Table
+		-has x Guests
+		-has aggregate aggression/tip meter
+		-has gravity
+		-meal cycle
+		
+	Guests
+		-Static
+		-throw demand events
+		-fill empty tables 
+		-leave after mealcycle
+		
+	Service Stations
+		-get/repair/upgrade player items
+		-demand player attention
+		
+	Other NPCS
+		-?????
+		-Hireable
+		
+Global
+	Restaurant Floor
+		-Upgradeable
+		-Tables
+		-Friction
+		-Obstacles
+		-Lighting
+		-Win/Loss: Too many angry guests
+		
+	
+		
