@@ -1,8 +1,0 @@
-<html>
-	<body>
-			<script src="/waitinggame/js/lib/phaser.js"></script>
-			<script src="/waitinggame/js/src/main.js"></script>
-			
-			<div id="appRoot"></div> 
-	</body>
-</html>
