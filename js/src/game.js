@@ -1,4 +1,4 @@
-define(['phaser', 'lodash'], function(Phaser, _){
+define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player, Restaurant){
 
     var WaitingGameApp = {};
 

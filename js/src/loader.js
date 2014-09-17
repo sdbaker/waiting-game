@@ -3,6 +3,8 @@ require.config({
     paths:{
         'phaser': 'lib/phaser',
         'waitingGameApp': 'src/game',
+        'player': 'src/player',
+        'restaurant': 'src/restaurant',
         'lodash': 'lib/lodash.min'
     },
     shim: {

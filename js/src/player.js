@@ -9,7 +9,7 @@ define(['phaser', 'lodash'], function(Phaser, _){
   Player.prototype = {
     update: function(){
 
-    }
+    },
     playerHitPatron: function(patronObj){
 
     },

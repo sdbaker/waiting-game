@@ -5,14 +5,14 @@ define(['phaser', 'lodash'], function(Phaser, _){
     this.patrons = [];
     this.servers = [];
     this.stations = [];
-  }
+  };
 
   Restaurant.prototype = {
     update: function(){
       
     }
-  }
+  };
 
   return Restaurant;
 
-})
+});
