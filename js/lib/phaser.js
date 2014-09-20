@@ -16837,7 +16837,7 @@ Phaser.LinkedList.prototype.constructor = Phaser.LinkedList;
 */
 
 /**
-* A set data structure. Allows items to add themselves to and remove themselves from the set. Items can only exist once in the set.
+* A set data structure. Allows dishes to add themselves to and remove themselves from the set. dishes can only exist once in the set.
 *
 * @class Phaser.ArrayList
 * @constructor
@@ -16911,7 +16911,7 @@ Phaser.ArrayList.prototype = {
     },
 
     /**
-    * Resets the list length and drops all items in the list.
+    * Resets the list length and drops all dishes in the list.
     *
     * @method Phaser.ArrayList#reset
     */
@@ -17357,7 +17357,7 @@ Phaser.Signal.prototype = {
             return;
         }
 
-        bindings = this._bindings.slice(); //clone array in case add/remove items during dispatch
+        bindings = this._bindings.slice(); //clone array in case add/remove dishes during dispatch
         this._shouldPropagate = true; //in case `halt` was called before dispatch or during the previous dispatch.
 
         //execute all callbacks until end of the list or until a callback returns `false` or stops propagation
@@ -22632,9 +22632,9 @@ Phaser.Input = function (game) {
 
     /**
     * A list of interactive objects. The InputHandler components add and remove themselves from this list.
-    * @property {Phaser.ArrayList} interactiveItems
+    * @property {Phaser.ArrayList} interactivedishes
     */
-    this.interactiveItems = new Phaser.ArrayList();
+    this.interactivedishes = new Phaser.ArrayList();
 
     /**
     * @property {Phaser.Point} _localPoint - Internal cache var.
@@ -25382,7 +25382,7 @@ Phaser.Pointer.prototype = {
 
             return this;
         }
-        else if (this.game.input.interactiveItems.total > 0)
+        else if (this.game.input.interactivedishes.total > 0)
         {
             this.processInteractiveObjects(fromClick);
         }
@@ -25400,7 +25400,7 @@ Phaser.Pointer.prototype = {
     */
     processInteractiveObjects: function (fromClick) {
 
-        this.game.input.interactiveItems.setAll('checked', false);
+        this.game.input.interactivedishes.setAll('checked', false);
 
         //  Work out which object is on the top
         this._highestRenderOrderID = Number.MAX_SAFE_INTEGER;
@@ -25410,7 +25410,7 @@ Phaser.Pointer.prototype = {
         //  First pass gets all objects that the pointer is over that DON'T use pixelPerfect checks and get the highest ID
         //  We know they'll be valid for input detection but not which is the top just yet
 
-        var currentNode = this.game.input.interactiveItems.first;
+        var currentNode = this.game.input.interactivedishes.first;
 
         do
         {
@@ -25426,14 +25426,14 @@ Phaser.Pointer.prototype = {
                     this._highestRenderObject = currentNode;
                 }
             }
-            currentNode = this.game.input.interactiveItems.next;
+            currentNode = this.game.input.interactivedishes.next;
         }
         while (currentNode !== null);
 
         //  Then in the second sweep we process ONLY the pixel perfect ones that are checked and who have a higher ID
         //  because if their ID is lower anyway then we can just automatically discount them
 
-        var currentNode = this.game.input.interactiveItems.first;
+        var currentNode = this.game.input.interactivedishes.first;
 
         do
         {
@@ -25446,7 +25446,7 @@ Phaser.Pointer.prototype = {
                     this._highestRenderObject = currentNode;
                 }
             }
-            currentNode = this.game.input.interactiveItems.next;
+            currentNode = this.game.input.interactivedishes.next;
         }
         while (currentNode !== null);
 
@@ -25565,7 +25565,7 @@ Phaser.Pointer.prototype = {
             this.game.input.currentPointers--;
         }
 
-        this.game.input.interactiveItems.callAll('_releasedHandler', this);
+        this.game.input.interactivedishes.callAll('_releasedHandler', this);
 
         this.targetObject = null;
 
@@ -27693,7 +27693,7 @@ Phaser.InputHandler.prototype = {
         if (this.enabled === false)
         {
             //  Register, etc
-            this.game.input.interactiveItems.add(this);
+            this.game.input.interactivedishes.add(this);
             this.useHandCursor = useHandCursor;
             this.priorityID = priority;
 
@@ -27830,7 +27830,7 @@ Phaser.InputHandler.prototype = {
         {
             //  De-register, etc
             this.enabled = false;
-            this.game.input.interactiveItems.remove(this);
+            this.game.input.interactivedishes.remove(this);
         }
 
     },
@@ -27851,7 +27851,7 @@ Phaser.InputHandler.prototype = {
 
             this.enabled = false;
 
-            this.game.input.interactiveItems.remove(this);
+            this.game.input.interactivedishes.remove(this);
 
             this._pointerData.length = 0;
             this.boundsRect = null;
@@ -45383,7 +45383,7 @@ Phaser.AnimationParser = {
 * Phaser.Cache constructor.
 *
 * @class Phaser.Cache
-* @classdesc A game only has one instance of a Cache and it is used to store all externally loaded assets such as images, sounds and data files as a result of Loader calls. Cached items use string based keys for look-up.
+* @classdesc A game only has one instance of a Cache and it is used to store all externally loaded assets such as images, sounds and data files as a result of Loader calls. Cached dishes use string based keys for look-up.
 * @constructor
 * @param {Phaser.Game} game - A reference to the currently running game.
 */

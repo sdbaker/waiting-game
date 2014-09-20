@@ -25,17 +25,17 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
         //Sprites
         WaitingGameApp.groundSprite = WaitingGameApp.gameInstance.add.tileSprite(0,0,1024,768, 'ground');
 
-        //Objects
-        WaitingGameApp.player = new Player(WaitingGameApp);
-        WaitingGameApp.restaurant = new Restaurant(WaitingGameApp);
-
         //Keyboard init
         WaitingGameApp.cursors = WaitingGameApp.gameInstance.input.keyboard.createCursorKeys();
 
         //Camera init
         WaitingGameApp.gameInstance.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
 
-        WaitingGameApp.setUpInro();
+        //Objects
+        WaitingGameApp.player = new Player(WaitingGameApp);
+        WaitingGameApp.restaurant = new Restaurant(WaitingGameApp);
+
+        WaitingGameApp.setUpIntro();
 
     };
 
@@ -83,7 +83,7 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
 
     };
 
-    WaitingGameApp.setUpInro = function(){
+    WaitingGameApp.setUpIntro = function(){
         if(!WaitingGameApp.logo){
             WaitingGameApp.logo = WaitingGameApp.gameInstance.add.sprite(0,200,'logo');
             WaitingGameApp.logo.fixedtoCamera = true;

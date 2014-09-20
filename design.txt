@@ -6,7 +6,7 @@ Actors
 		-Move x,y continuously according to gravity
 		-Interact with tables, service stations
 		-Hold out Item
-		-Cycle through held items
+		-Cycle through held dishes
 		-Upgradeable attributes(inv, speed, etc)
 		
 	Table
@@ -22,7 +22,7 @@ Actors
 		-leave after mealcycle
 		
 	Service Stations
-		-get/repair/upgrade player items
+		-get/repair/upgrade player dishes
 		-demand player attention
 		
 	Other NPCS
