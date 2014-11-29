@@ -13,8 +13,10 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
 
     WaitingGameApp.preload = function(){
         //Load all assets here
-        //WaitingGameApp.gameInstance.load.image('ground', 'res/img/principalGreen.png');
-        //WaitingGameApp.gameInstance.load.spritesheet('torso', 'res/img/torso2.png', 32, 32);
+        WaitingGameApp.gameInstance.load.image('floor', 'res/img/floor.png');
+        WaitingGameApp.gameInstance.load.image('playerSprite', 'res/img/playerSprite.png', 50, 50);
+        WaitingGameApp.gameInstance.load.image('plate', 'res/img/plate.png', 50, 50);
+		
 
     };
 
@@ -23,11 +25,12 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
         WaitingGameApp.gameInstance.world.setBounds(0,0,1000,1000);
 
         //Sprites
-        WaitingGameApp.groundSprite = WaitingGameApp.gameInstance.add.tileSprite(0,0,1024,768, 'ground');
+        WaitingGameApp.groundSprite = WaitingGameApp.gameInstance.add.tileSprite(0,0,1024,768, 'floor');
 
         //Keyboard init
         WaitingGameApp.cursors = WaitingGameApp.gameInstance.input.keyboard.createCursorKeys();
-
+		WaitingGameApp.gameInstance.input.keyboard.addKeyCapture([ Phaser.Keyboard.SPACEBAR ]);
+		
         //Camera init
         WaitingGameApp.gameInstance.camera.deadzone = new Phaser.Rectangle(150, 150, 500, 300);
 

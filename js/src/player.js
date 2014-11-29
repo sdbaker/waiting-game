@@ -32,7 +32,7 @@ define(['phaser', 'lodash'], function(Phaser, _){
     this.dishes = waitingGameApp.gameInstance.add.group();
     this.dishes.enableBody = true;
     this.dishes.physicsBodyType = Phaser.Physics.ARCADE;
-
+	this.plate = null;
     this.sprite.bringToTop();
 
     //stress
@@ -74,7 +74,16 @@ define(['phaser', 'lodash'], function(Phaser, _){
                 this.sprite.animations.play('walk', 10);
 
             }
+			if (this.waitingGameApp.gameInstance.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)){
+				if(!this.plate){
+			    	this.plate = this.waitingGameApp.gameInstance.add.sprite(this.sprite.x,this.sprite.y + 5,'plate');
+				}
+			}
             else{
+				if(this.plate){
+					this.plate.kill();
+					this.plate = null;
+				}
                 if(this.speed > 0){
                     this.speed -=14;
                 }
@@ -86,6 +95,10 @@ define(['phaser', 'lodash'], function(Phaser, _){
             if(this.speed > 0){
                 this.waitingGameApp.gameInstance.physics.arcade.velocityFromRotation(this.sprite.rotation, this.speed, this.sprite.body.velocity);
             }
+			if(this.plate){
+				this.plate.x = this.sprite.x;
+				this.plate.y = this.sprite.y + 5;
+			}
 
         }
 
@@ -93,7 +106,7 @@ define(['phaser', 'lodash'], function(Phaser, _){
             this.playerLoss();
         }
 
-        this.sprite.rotation = this.waitingGameApp.gameInstance.physics.arcade.angleToPointer(this.sprite);
+        //this.sprite.rotation = this.waitingGameApp.gameInstance.physics.arcade.angleToPointer(this.sprite);
 
         this.stressEmitter.x = this.sprite.x;
         this.stressEmitter.y = this.sprite.y;
