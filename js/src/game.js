@@ -11,10 +11,50 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
         });
     };
 
+    //  The Google WebFont Loader will look for this object, so create it before loading the script.
+    WebFontConfig = {
+        //  'active' means all requested fonts have finished loading
+        //  We set a 1 second delay before calling 'createText'.
+        //  For some reason if we don't the browser cannot render the text the first time it's created.
+        active: function() { WaitingGameApp.gameInstance.time.events.add(Phaser.Timer.SECOND, WaitingGameApp.createText, this); },
+
+        //  The Google Fonts we want to load (specify as many as you like in the array)
+        google: {
+            families: ['Press Start 2P']
+        }
+    };
+
+    WaitingGameApp.createText = function(){
+
+        WaitingGameApp.logo = WaitingGameApp.gameInstance.add.text(320, -20, "WAITING GAME");
+        WaitingGameApp.logo.anchor.setTo(0.5);
+
+        WaitingGameApp.logo.font = 'Press Start 2P';
+        WaitingGameApp.logo.fontSize = 48;
+
+//        //  x0, y0 - x1, y1
+//        var grd = text.context.createLinearGradient(0, 0, 0, text.canvas.height);
+//        grd.addColorStop(0, '#8ED6FF');
+//        grd.addColorStop(1, '#004CB3');
+        WaitingGameApp.logo.fill = '#FFFFFF';
+
+        WaitingGameApp.logo.align = 'center';
+        WaitingGameApp.logo.stroke = '#000000';
+        WaitingGameApp.logo.strokeThickness = 2;
+        WaitingGameApp.logo.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+        WaitingGameApp.logo.fixedtoCamera = true;
+
+        WaitingGameApp.logo.bounce=WaitingGameApp.gameInstance.add.tween(WaitingGameApp.logo);
+        WaitingGameApp.logo.bounce.to({ y: 200 }, 3000, Phaser.Easing.Bounce.Out);
+        WaitingGameApp.logo.bounce.start();
+    }
+
     WaitingGameApp.preload = function(){
         //Load all assets here
         //WaitingGameApp.gameInstance.load.image('ground', 'res/img/principalGreen.png');
         //WaitingGameApp.gameInstance.load.spritesheet('torso', 'res/img/torso2.png', 32, 32);
+        //  Load the Google WebFont Loader script
+        WaitingGameApp.gameInstance.load.script('webfont', '//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js');
 
     };
 
@@ -84,22 +124,19 @@ define(['phaser', 'lodash', 'player', 'restaurant'], function(Phaser, _, Player,
     };
 
     WaitingGameApp.setUpIntro = function(){
-        if(!WaitingGameApp.logo){
-            WaitingGameApp.logo = WaitingGameApp.gameInstance.add.sprite(0,200,'logo');
-            WaitingGameApp.logo.fixedtoCamera = true;
-        }
         WaitingGameApp.gameInstance.camera.focusOnXY(0,0);
         WaitingGameApp.gameInstance.input.onDown.add(WaitingGameApp.removeLogo, this);
     };
 
     WaitingGameApp.removeLogo = function(){
         WaitingGameApp.gameInstance.input.onDown.remove(WaitingGameApp.removeLogo, WaitingGameApp.gameInstance);
-        WaitingGameApp.logo.kill();
         WaitingGameApp.startNewRound();
     };
 
     WaitingGameApp.startNewRound = function(){
-
+        WaitingGameApp.logo.flicker = WaitingGameApp.gameInstance.add.tween(WaitingGameApp.logo);
+        WaitingGameApp.logo.flicker.to({alpha:0}, 50, Phaser.Easing.Linear.None, true, 0, 50);
+        WaitingGameApp.logo.flicker.start();
     };
 
     return WaitingGameApp;
